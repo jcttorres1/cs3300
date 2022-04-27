@@ -1,15 +1,72 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cs3300</title>
+    <title>Jake Torres - Portfolio</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <style>
+      #body a:link, a:visited {
+        color: #0000ff;
+        padding: 2.5px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
+      #body a:hover, a:active {
+        color: #007bff;
+      }
+
+      #intro {
+        padding-top: 15px;
+        text-align: center;
+      }
+    </style>
+
   </head>
 
   <body>
+
+  <!-- Sets up the Navigation bar -->
+  <nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+
+    <!-- Add a home page link -->
+    <a class="navbar-brand" href="/projects">Home Page</a>
+
+    <!-- aligns the menu options to the right of the page -->
+    <div class="align-right row">
+     <% if user_signed_in? %> 
+
+        <!-- If the user is logged in, display the sign out button -->
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete, :class => "btn btn-outline-light btn-defualt" %>
+        <%= button_to "New Project", new_project_path, method: :get, :class => "btn btn-outline-light btn-defualt" %>
+      
+    <% else %>
+        
+        <!-- If there is no user logged in, display these buttons -->
+        <%= button_to "Sign up", new_user_registration_path, method: :get, :class => "btn btn-outline-light btn-defualt" %>
+        <%= button_to "Login", new_user_session_path, method: :get, :class => "btn btn-outline-light btn-default" %>
+    
+    <% end %>
+    
+    </div>
+  </div>
+
+</nav>
+
+<div class="container">
+      <p id="intro">Welcome to the Portfolio of Jake Torres. I am an Information Systems major at UCCS. Here you can view previous projects I have worked on.
+      Each project contains a title and a description you can view, in order to use more options, such as editing,
+      please login.</p>
+</div>
+
+<!-- Main body of application, has an id to style the links -->
+<div class="container" id="body">
     <%= yield %>
+</div>
   </body>
 </html>
